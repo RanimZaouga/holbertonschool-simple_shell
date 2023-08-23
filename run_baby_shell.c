@@ -20,8 +20,8 @@ void execute_command(const char *command)
     }
     else if (child_pid == 0)
     {
-        // Child process
-        char *args[] = {(char *)command, NULL}; // Cast away const for execvp
+        /* Child process */
+        char *args[] = {(char *)command, NULL}; /* Cast away const for execvp */
         execvp(command, args);
         
         perror("execvp");
@@ -29,7 +29,7 @@ void execute_command(const char *command)
     }
     else
     {
-        // Parent process
+        /* Parent process */
         int status;
         waitpid(child_pid, &status, 0);
         if (WIFEXITED(status))
