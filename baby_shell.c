@@ -3,6 +3,7 @@
 #define MAX_INPUT_LENGTH 100
 
 int main(void)
+
 {
     info_t info;
     char *av[] = {"simple_shell", NULL}; /* Argument vector for the shell itself */
