@@ -2,44 +2,40 @@
 
 #define MAX_INPUT_LENGTH 100
 
-int main(void)
-
-{
-    info_t info;
-    char *av[] = {"simple_shell", NULL}; /* Argument vector for the shell itself */
-
+int main() {
+    char command[1024];
     while (1)
 	{
-        info.argv = NULL;
-        printf("$ ");
-        ssize_t r = getline(&(info.argv), &(size_t){0}, stdin);
-        if (r == -1)
+        printf("simple_shell> ");
+        fgets(command, 1024, stdin);
+        /* Check if user entered "end of file" (Ctrl+D) */
+        if (strcmp(command, "EOF\n") == 0)
 		{
-            if (feof(stdin))
-			{
-                printf("\n"); /* Print newline after Ctrl+D */
-                free(info.argv);
-                break;
-            }
-            perror("getline");
-            exit(EXIT_FAILURE);
+            printf("Exiting...\n");
+            break;
         }
-        info.argv[r - 1] = NULL; /* Remove newline */
-
-        if (!info.argv[0])
+        /* Check if command is empty */
+        if (strcmp(command, "\n") == 0)
 		{
-            free(info.argv);
-            continue; /* Empty line */
+            continue;
         }
-
-        set_info(&info, av);
-        if (!find_builtin(&info))
+        /* Check if command is a valid executable */
+        if (access(command, X_OK) != 0)
 		{
-            find_cmd(&info);
+            printf("Error: '%s' is not a valid executable.\n", command);
+            continue;
         }
-
-        free_info(&info, 1);
+        /* Execute command */
+        if (fork() == 0)
+		{
+            execve(command, NULL, NULL);
+            perror("Error");
+            exit(1);
+        }
+		else
+		{
+            wait(NULL);
+        }
     }
-
-    return (EXIT_SUCCESS);
+    return (0);
 }
