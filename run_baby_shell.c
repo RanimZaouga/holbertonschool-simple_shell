@@ -1,6 +1,48 @@
 #include "shell.h"
-
 #define MAX_INPUT_LENGTH 100
+
+/**
+ * execute_command - Execute the given command as a child process using execvp.
+ *
+ * This function creates a child process using fork and attempts to execute
+ * the specified command using the execvp system call. It waits for the child
+ * process to complete and provides information about the exit status or
+ * termination signal.
+ *
+ * @command: The command to execute.
+ */
+void execute_command(const char *command)
+{
+    pid_t child_pid = fork();
+    if (child_pid < 0)
+    {
+        perror("fork");
+    }
+    else if (child_pid == 0)
+    {
+        // Child process
+        char *args[] = {command, NULL}; // Create an argv array for execvp
+        execvp(command, args);
+        
+        perror("execvp");
+        exit(EXIT_FAILURE);
+    }
+    else
+    {
+        // Parent process
+        int status;
+        waitpid(child_pid, &status, 0);
+        if (WIFEXITED(status))
+        {
+            printf("Child process exited with status %d\n", WEXITSTATUS(status));
+        }
+        else if (WIFSIGNALED(status))
+        {
+            printf("Child process terminated by signal %d\n", WTERMSIG(status));
+        }
+    }
+}
+
 /*
  * run_shell - A simple Unix command line interpreter
  *
