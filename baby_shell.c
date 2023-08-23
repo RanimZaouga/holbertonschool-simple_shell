@@ -2,7 +2,8 @@
 
 #define MAX_INPUT_LENGTH 100
 
-int main() {
+int main(void)
+{
     char command[1024];
     while (1)
 	{

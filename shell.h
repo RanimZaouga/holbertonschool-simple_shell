@@ -27,7 +27,7 @@ typedef struct {
     int status;    /* Status of the command execution */
 } info_t;
 
-int main(void)
+int main(void);
 /* Clears the info struct */
 void clear_info(info_t *info);
 
