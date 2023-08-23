@@ -12,7 +12,6 @@
  * @command: The command to execute.
  */
 void execute_command(const char *command)
-void execute_command(const char *command)
 {
     pid_t child_pid = fork();
     if (child_pid < 0)
