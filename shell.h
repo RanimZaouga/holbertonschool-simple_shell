@@ -28,22 +28,6 @@ typedef struct {
 } info_t;
 
 int main(void);
-/* Clears the info struct */
-void clear_info(info_t *info);
-
-/* Sets information in the info struct */
-void set_info(info_t *info, char **av);
-
-/* Finds and executes built-in commands */
-int find_builtin(info_t *info);
-
-/* Finds and executes external commands */
-void find_cmd(info_t *info);
-
-/* Forks a child process to execute a command */
-void fork_cmd(info_t *info);
-
-/* Prints error messages */
-void print_error(info_t *info, const char *message);
+void run_shell(void);
 
 #endif
