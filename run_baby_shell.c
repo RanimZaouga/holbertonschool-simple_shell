@@ -12,19 +12,21 @@
  * @command: The command to execute.
  */
 void execute_command(const char *command)
+void execute_command(const char *command)
 {
     pid_t child_pid = fork();
     if (child_pid < 0)
     {
-        perror("fork");
+        perror("fork"); /* Handle fork error */
     }
     else if (child_pid == 0)
     {
         /* Child process */
-        char *args[] = {(char *)command, NULL}; /* Cast away const for execvp */
-        execvp(command, args);
+        char *args[] = {NULL, NULL}; /* Create an array for execvp */
+        args[0] = (char *)command; /* Assign the command to the first element */
+        execve(command, args, NULL);
         
-        perror("execvp");
+        perror("execve"); /* Handle execve error */
         exit(EXIT_FAILURE);
     }
     else
@@ -61,7 +63,6 @@ void run_shell()
     {
         printf("simple_shell> "); /* Display shell prompt */
         
-        // Read user input
         if (fgets(input, sizeof(input), stdin) == NULL)
         {
             if (feof(stdin))
@@ -78,7 +79,6 @@ void run_shell()
         execute_command(input); /* Execute the entered command */
     }
 }
-
 
 int main(void)
 {
