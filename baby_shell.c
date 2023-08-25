@@ -23,17 +23,18 @@ void run_shell(void)
 	pid_t pid;
 
 	while (1)
-	{
-			printf("simple_shell> "); /* Display shell prompt */
+{
+    printf("simple_shell> "); /* Display shell prompt */
 
-			/* Read user input */
-			scanf("%s", command);
+    /* Read user input */
+    scanf("%s", command);
 
-			/* Check if user entered "exit" command */
-			if (strcmp(command, "exit") == 0)
-		
-		break; /* Exit the shell */
-	}
+    /* Check if user entered "exit" command */
+    if (strcmp(command, "exit") == 0)
+    {
+        break; /* Exit the shell */
+    }
+}
 
 		/* Create a child process */
 		pid = fork();
