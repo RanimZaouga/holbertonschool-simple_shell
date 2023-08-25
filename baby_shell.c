@@ -20,15 +20,15 @@ void run_shell(void)
 
     while (1)
     {
-        printf("simple_shell> "); /* Display shell prompt */
+            printf("simple_shell> "); /* Display shell prompt */
 
-        /* Read user input */
-        scanf("%s", command);
+            /* Read user input */
+            scanf("%s", command);
 
-        /* Check if user entered "exit" command */
-        if (strcmp(command, "exit") == 0)
+            /* Check if user entered "exit" command */
+            if (strcmp(command, "exit") == 0)
         {
-            break; /* Exit the shell */
+        break; /* Exit the shell */
         }
 
         /* Create a child process */
@@ -49,8 +49,8 @@ void run_shell(void)
         else
         {
             /* Fork error */
-            perror("Error"); /* Handle fork error */
-            exit(1); /* Exit with error status */
-        }
-    }
+           perror("Error"); /* Handle fork error */
+           exit(1); /* Exit with error status */
+		}
+   }
 }
