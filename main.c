@@ -1,6 +1,6 @@
 #include "shell.h"
 /**
- * main - Entry point for the simple Unix command line interpreter (baby shell).
+ * main - Entry point for the simple Unix command line interpreter (baby shell)
  *
  * This program implements a basic Unix shell that
  * reads commands from the user,executes them if they are valid executables,
@@ -14,7 +14,7 @@
  * Return: Always returns 0 to indicate successful execution.
  */
 /* Entry point of the program */
-int main()
+int main(void)
 {
 	run_shell(); /* Start the shell */
 	return (0); /* Return success status */

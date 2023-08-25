@@ -21,10 +21,11 @@ extern char **environ;
 #include <dirent.h>
 
 /* Struct to hold shell-related information */
-typedef struct {
-    char **argv;   /* Argument vector for the current command */
-    char *path;    /* Path of the executable */
-    int status;    /* Status of the command execution */
+typedef struct
+{
+	char **argv;   /* Argument vector for the current command */
+	char *path;    /* Path of the executable */
+	int status;    /* Status of the command execution */
 } info_t;
 
 int main(void);
