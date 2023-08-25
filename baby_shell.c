@@ -31,9 +31,9 @@ void run_shell(void)
 
 			/* Check if user entered "exit" command */
 			if (strcmp(command, "exit") == 0)
-		{
+		
 		break; /* Exit the shell */
-		}
+	}
 
 		/* Create a child process */
 		pid = fork();
@@ -56,5 +56,4 @@ void run_shell(void)
 		   perror("Error"); /* Handle fork error */
 		   exit(1); /* Exit with error status */
 		}
-   }
 }
